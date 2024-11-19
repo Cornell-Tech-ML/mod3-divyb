@@ -174,7 +174,13 @@ def tensor_map(
         in_index = cuda.local.array(MAX_DIMS, numba.int32)
         i = cuda.blockIdx.x * cuda.blockDim.x + cuda.threadIdx.x
         # TODO: Implement for Task 3.3.
-        raise NotImplementedError("Need to implement for Task 3.3")
+        #raise NotImplementedError("Need to implement for Task 3.3")
+
+        if i < out_size:
+            out_index[:] = to_index(i, out_shape, out_strides)
+            in_index[:] = to_index(i, in_shape, in_strides)
+            out[out_index[0]] = fn(in_storage[in_index[0]])  # Apply the function
+
 
     return cuda.jit()(_map)  # type: ignore
 
@@ -217,7 +223,13 @@ def tensor_zip(
         i = cuda.blockIdx.x * cuda.blockDim.x + cuda.threadIdx.x
 
         # TODO: Implement for Task 3.3.
-        raise NotImplementedError("Need to implement for Task 3.3")
+        #raise NotImplementedError("Need to implement for Task 3.3")
+        if i < out_size:
+            out_index[:] = to_index(i, out_shape, out_strides)
+            a_index[:] = to_index(i, a_shape, a_strides)
+            b_index[:] = to_index(i, b_shape, b_strides)
+            out[out_index[0]] = fn(a_storage[a_index[0]], b_storage[b_index[0]])  # Apply the function
+
 
     return cuda.jit()(_zip)  # type: ignore
 
@@ -250,7 +262,8 @@ def _sum_practice(out: Storage, a: Storage, size: int) -> None:
     pos = cuda.threadIdx.x
 
     # TODO: Implement for Task 3.3.
-    raise NotImplementedError("Need to implement for Task 3.3")
+    #raise NotImplementedError("Need to implement for Task 3.3")
+    
 
 
 jit_sum_practice = cuda.jit()(_sum_practice)
