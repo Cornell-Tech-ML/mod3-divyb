@@ -336,7 +336,7 @@ def tensor_reduce(
 
         # TODO: Implement for Task 3.3.
         #raise NotImplementedError("Need to implement for Task 3.3")
-         if out_pos >= out_size:
+        if out_pos >= out_size:
             return
         
         cache[pos] = reduce_value
