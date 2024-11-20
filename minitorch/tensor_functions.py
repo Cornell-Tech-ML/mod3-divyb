@@ -223,12 +223,9 @@ class Sigmoid(Function):
             Tensor: The gradient of the input tensor.
 
         """
-        (sig,) = ctx.saved_values
-        neg_sig = sig.f.neg_map(sig)
-        return grad_output.f.mul_zip(
-            sig.f.mul_zip(sig, 1 + neg_sig),
-            grad_output,
-        )
+        (sigma,) = ctx.saved_values
+        return sigma * (-sigma + 1.0) * grad_output
+        
 
 
 class ReLU(Function):
@@ -430,30 +427,25 @@ class Permute(Function):
     """Permute the dimensions of a tensor based on a specified order."""
 
     @staticmethod
-    def forward(ctx: Context, t1: Tensor, order: Tensor) -> Tensor:
-        """Permute the dimensions of a tensor, given a new order."""
-        # permute(self, *order:int) is a method defined for TensorData in tensor_data.py
-        # Tensor._tensor is an instance of TensorData
-        # TensorData._storage is of type Storage (tensor_data.py), a np array of float64
-        # So we must convert to a list of integers to pass as `order`
-        int_order = [int(x) for x in order._tensor._storage]
-        ctx.save_for_backward(int_order)
 
-        # t1._new creates a new tensor with the same backend as `t1`
-        return t1._new(t1._tensor.permute(*int_order))
+
+    def forward(ctx: Context, a: Tensor, order: Tensor) -> Tensor:
+        """Permute the dimensions of the tensor."""
+        ctx.save_for_backward(order)
+
+        return a._new(a._tensor.permute(*[int(order[i]) for i in range(order.size)]))
 
     @staticmethod
     def backward(ctx: Context, grad_output: Tensor) -> Tuple[Tensor, float]:
-        """Permute the gradients back to the original order."""
-        (new_order,) = ctx.saved_values
-
-        # Create a mapping from value to index for efficient lookup
-        # Use the mapping to construct the original order
-        original_order_map = {v: i for i, v in enumerate(new_order)}
-        original_order = [original_order_map[i] for i in range(len(new_order))]
-
-        return grad_output._new(grad_output._tensor.permute(*original_order)), 0.0
-
+        """PCompute"""
+        order: Tensor = ctx.saved_values[0]
+        order2: List[int] = [
+            a[0]
+            for a in sorted(
+                enumerate([order[i] for i in range(order.size)]), key=lambda a: a[1]
+            )
+        ]
+        return grad_output._new(grad_output._tensor.permute(*order2)), 0.0
 
 class View(Function):
     """View function for reshaping tensors."""
