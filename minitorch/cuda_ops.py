@@ -43,7 +43,7 @@ def device_jit(fn: Fn, **kwargs: Any) -> Fn:
     return _jit(device=True, **kwargs)(fn)  # type: ignore
 
 
-def jit(fn, **kwargs: Any) -> FakeCUDAKernel:
+def jit(fn: Fn, **kwargs: Any) -> FakeCUDAKernel:
     """JIT compile a function for execution on the device (GPU).
 
     Args:
