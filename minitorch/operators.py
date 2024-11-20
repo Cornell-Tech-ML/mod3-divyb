@@ -255,7 +255,7 @@ def log_back(x: float, y: float) -> float:
         The inv of x
 
     """
-    return (1.0/y) * x
+    return (1.0/x) * y if x != 0 else 0
 
 
 def inv_back(x: float, y: float) -> float:
