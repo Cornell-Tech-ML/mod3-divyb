@@ -62,11 +62,11 @@ def to_index(ordinal: int, shape: Shape, out_index: OutIndex) -> None:
         out_index: tensor index corresponding to position.
 
     """
-    cur_ord = ordinal
+    cur_ord = ordinal + 0
     for i in range(len(shape) - 1, -1, -1):
-        out_index[i] = int(cur_ord % shape[i])
-        cur_ord = cur_ord // shape[i]
-
+        sh = shape[i]
+        out_index[i] = int(cur_ord % sh)
+        cur_ord = cur_ord // sh
 
 def broadcast_index(big_index: Index, big_shape: Shape, shape: Shape, out_index: OutIndex) -> None:
     """Convert a `big_index` into `big_shape` to a smaller `out_index` into `shape`
