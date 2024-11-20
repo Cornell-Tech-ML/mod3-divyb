@@ -1,7 +1,9 @@
 """Collection of the core mathematical operators used throughout the code base."""
 
+import math
 
 # ## Task 0.1
+from typing import Callable, Iterable
 
 #
 # Implementation of a prelude of elementary functions.
@@ -31,135 +33,130 @@
 
 
 # TODO: Implement for Task 0.1.
-
-import math
-from typing import Iterable, Callable
-
-
-def mul(a: float, b: float) -> float:
-    """Multiply two numbers.
+def mul(x: float, y: float) -> float:
+    """Multiplies two numbers or tensors element-wise.
 
     Args:
     ----
-        a (float): The first number.
-        b (float): The second number.
+        x: The first number or tensor.
+        y: The second number or tensor.
 
     Returns:
     -------
-        float: The product of the two numbers.
+        The element-wise product of `x` and `y`.
 
     """
-    return a * b
+    return x * y
 
 
-def id(a: float) -> float:
-    """Identity function.
+def id(x: float) -> float:
+    """Returns input unchanged.
 
     Args:
     ----
-        a (float): The input value.
+        x: The first number or tensor.
 
     Returns:
     -------
-        float: The input value.
+        The input unchanged
 
     """
-    return a
+    return x
 
 
-def add(a: float, b: float) -> float:
-    """Add two numbers.
+def add(x: float, y: float) -> float:
+    """Adds two numbers or tensors element-wise.
 
     Args:
     ----
-        a (float): The first number.
-        b (float): The second number.
+        x: The first number or tensor.
+        y: The second number or tensor.
 
     Returns:
     -------
-        float: The sum of the two numbers.
+        The element-wise addition of `x` and `y`.
 
     """
-    return a + b
+    return x + y
 
 
-def neg(a: float) -> float:
-    """Negate a number.
+def neg(x: float) -> float:
+    """Returns negation of the input.
 
     Args:
     ----
-        a (float): The input value.
+        x: The first number or tensor.
 
     Returns:
     -------
-        float: The negation of the input value.
+        The input negated
 
     """
-    return -a
+    return -x
 
 
-def lt(a: float, b: float) -> bool:
-    """Less than comparison.
+def lt(x: float, y: float) -> bool:
+    """Checks if one number is less than another
 
     Args:
     ----
-        a (float): The first number.
-        b (float): The second number.
+        x: The first number or tensor.
+        y: The second number or tensor.
 
     Returns:
     -------
-        bool: True if a is less than b, False otherwise.
+        The true if one number is less than another of `x` and `y`.
 
     """
-    return a < b
+    return x < y
 
 
-def eq(a: float, b: float) -> bool:
-    """Equality comparison.
+def eq(x: float, y: float) -> float:
+    """Checks if one number is equal to another
 
     Args:
     ----
-        a (float): The first number.
-        b (float): The second number.
+        x: The first number or tensor.
+        y: The second number or tensor.
 
     Returns:
     -------
-        bool: True if a is equal to b, False otherwise.
+        The true if one number equal to another of `x` and `y`.
 
     """
-    return a == b
+    return x == y
 
 
-def max(a: float, b: float) -> float:
-    """Maximum of two numbers.
+def max(x: float, y: float) -> float:
+    """Checks max
 
     Args:
     ----
-        a (float): The first number.
-        b (float): The second number.
+        x: The first number or tensor.
+        y: The second number or tensor.
 
     Returns:
     -------
-        float: The maximum of the two numbers.
+        The larger of `x` and `y`.
 
     """
-    return a if a > b else b
+    return x if x > y else y
 
 
-def is_close(a: float, b: float) -> bool:
-    """Check if two numbers are close.
+def is_close(x: float, y: float) -> bool:
+    """Checks if two numbers are equal
 
     Args:
     ----
-        a (float): The first number.
-        b (float): The second number.
+        x: The first number or tensor.
+        y: The second number or tensor.
 
     Returns:
     -------
-        bool: True if the numbers are within 1e-2, False otherwise.
+        The larger of `x` and `y`.
 
     """
-    return abs(a - b) < 1e-2
+    return abs(x - y) < 1e-2
 
 
 def sigmoid(a: float) -> float:
@@ -175,8 +172,11 @@ def sigmoid(a: float) -> float:
 
     """
     if a >= 0:
+
         return 1.0 / (1.0 + math.exp(-a))
+
     else:
+
         return math.exp(a) / (1.0 + math.exp(a))
 
 
@@ -195,98 +195,99 @@ def relu(a: float) -> float:
     return a if a > 0 else 0
 
 
-def log(a: float) -> float:
-    """Log function.
+
+
+def log(x: float) -> float:
+    """Returns log of the input.
 
     Args:
     ----
-        a (float): The input value.
+        x: The first number or tensor.
 
     Returns:
     -------
-        float: The log of the input value.
+        The log of x
 
     """
-    return math.log(a)
+    return math.log(x)
 
 
-def exp(a: float) -> float:
-    """Exponential function.
+def exp(x: float) -> float:
+    """Returns exp of the input.
 
     Args:
     ----
-        a (float): The input value.
+        x: The first number or tensor.
 
     Returns:
     -------
-        float: The exponential of the input value.
+        The exp of x
 
     """
-    return math.exp(a)
+    return math.exp(x)
 
 
-def inv(a: float) -> float:
-    """Inverse function.
+def inv(x: float) -> float:
+    """Returns inv of the input.
 
     Args:
     ----
-        a (float): The input value.
+        x: The first number or tensor.
 
     Returns:
     -------
-        float: The inverse of the input value.
+        The inv of x
 
     """
-    return 1.0 / a
+    return 1.0 / x
 
 
-def log_back(a: float, b: float) -> float:
-    """Computes the derivative of log(a) multiplied by a second argument b.
+def log_back(x: float, y: float) -> float:
+    """Returns inv of the input.
 
     Args:
     ----
-        a (float): The input value to the log function.
-        b (float): The upstream gradient or another multiplier.
+        x: The first number or tensor.
+        y: The second number or tensor.
 
     Returns:
     -------
-        float: The result of (1/a) * b, which is the derivative of log(a) times b.
+        The inv of x
 
     """
-    return (1 / a) * b
+    return (1.0/y) * x
 
 
-def inv_back(a: float, b: float) -> float:
-    """Computes the derivative of 1/a multiplied by a second argument b.
+def inv_back(x: float, y: float) -> float:
+    """Returns inv_back of the input.
 
     Args:
     ----
-        a (float): The input value to the inverse function.
-        b (float): The upstream gradient or another multiplier.
+        x: The first number or tensor.
+        y: The second number or tensor.
 
     Returns:
     -------
-        float: The result of (-1/(a^2)) * b, which is the derivative of 1/a times b.
+        The inv_back of the input
 
     """
-    return (-1 / (a**2)) * b
+    return -1 / (x ** 2) * y
 
 
-def relu_back(a: float, b: float) -> float:
-    """Computes the derivative of the ReLU function multiplied by a second argument b.
+def relu_back(x: float, y: float) -> float:
+    """Returns relu_back of the input.
 
     Args:
     ----
-        a (float): The input value to the ReLU function.
-        b (float): The upstream gradient or another multiplier.
+        x: The first number or tensor.
+        y: The second number or tensor.
 
     Returns:
     -------
-        float: The result of (1 if a > 0 else 0) times b.
+        The relu_back of the input
 
     """
-    return (1 if a > 0 else 0) * b
-
+    return (1 if x > 0 else 0) * y
 
 # ## Task 0.3
 
@@ -296,165 +297,172 @@ def relu_back(a: float, b: float) -> float:
 # - map
 # - zipWith
 # - reduce
-#
+
+
+def map(func: Callable[[float], float], iterable: list[float]) -> list[float]:
+    """Apply a function to each element of a list and return a new list with the results.
+
+    This function takes a function and an iterable of floats, applies the function
+    to each element of the iterable, and returns a new list containing the results.
+
+    Parameters
+    ----------
+    func : Callable[[float], float]
+        A function that takes a single float argument and returns a float.
+    iterable : List[float]
+        A list of floats to which the function will be applied.
+
+    Returns
+    -------
+    List[float]
+        A list of floats resulting from applying the function to each element
+        of the input list.
+
+    """
+    lst = []
+    for i in iterable:
+        lst.append(func(i))
+    return lst
+
+
+def zipWith(
+    func: Callable[[float, float], float],
+    iterable1: Iterable[float],
+    iterable2: Iterable[float],
+) -> list[float]:
+    """Combine elements from two lists using a function.
+
+    This function takes a binary function and two lists of floats, applies the function
+    to corresponding elements from both lists, and returns a new list with the results.
+
+    Parameters
+    ----------
+    func : Callable[[float, float], float]
+        A function that takes two float arguments and returns a float.
+    iterable1 : List[float]
+        The first list of floats.
+    iterable2 : List[float]
+        The second list of floats.
+
+    Returns
+    -------
+    List[float]
+        A list of floats resulting from applying the function to corresponding
+        elements from both input lists.
+
+    """
+    iter1 = iter(iterable1)
+    iter2 = iter(iterable2)
+
+    lst = []
+    while True:
+        try:
+            lst.append(func(next(iter1), next(iter2)))
+        except StopIteration:
+            break
+    return lst
+
+
+def reduce(func: Callable[[float, float], float], iterable: Iterable[float]) -> float:
+    """Returns mapped of a function to list
+
+    Args:
+    ----
+        func: The function.
+        iterable: The second number or tensor.
+
+    Returns:
+    -------
+        Higher-order function that reduces an iterable to a single value using a given function
+
+    """
+    iterator = iter(iterable)
+
+    # Initialize the result with the first element
+    try:
+        result = next(iterator)
+    except StopIteration:
+        return 0
+
+    # Apply the reduction operation for the rest of the elements
+    for item in iterator:
+        result = func(result, item)
+
+    return result
+
+
 # Use these to implement
 # - negList : negate a list
 # - addLists : add two lists together
 # - sum: sum lists
 # - prod: take the product of lists
 
+
+def negList(lst: list[float]) -> list[float]:
+    """Negates each element in the list.
+
+    Args:
+    ----
+        lst (list[float]): A list of floats to be negated.
+
+    Returns:
+    -------
+        list[float]: A list with each element negated.
+
+    """
+    return map(neg, lst)
+
+
+def addLists(lst1: Iterable[float], lst2: Iterable[float]) -> list[float]:
+    """Add corresponding elements of two iterables using the `zipWith` function.
+
+    This function takes two iterables of floats and returns a list of floats where
+    each element is the sum of corresponding elements from the input iterables.
+
+    Parameters
+    ----------
+    lst1 : Iterable[float]
+        The first iterable of floats.
+    lst2 : Iterable[float]
+        The second iterable of floats.
+
+    Returns
+    -------
+    List[float]
+        A list of floats resulting from adding corresponding elements from `lst1` and `lst2`.
+
+    """
+    return zipWith(add, lst1, lst2)
+
+
+def sum(lst: Iterable[float]) -> float:
+    """Negates each element in the list.
+
+    Args:
+    ----
+        lst (list[float]): A list of floats to be summed.
+
+    Returns:
+    -------
+        sum of elements of lst
+
+    """
+    return reduce(add, lst)
+
+
+def prod(lst: Iterable[float]) -> float:
+    """Negates each element in the list.
+
+    Args:
+    ----
+        lst (list[float]): A list of floats to be summed.
+
+    Returns:
+    -------
+        sum of elements of lst
+
+    """
+    return reduce(mul, lst)
+
+
 # TODO: Implement for Task 0.3.
-
-
-def map(fn: Callable[[float], float], items: Iterable[float]) -> list[float]:
-    """Apply a function to each item in an iterable.
-
-    Args:
-    ----
-        fn (function): The function to apply.
-        items (iterable): The iterable of items.
-
-    Returns:
-    -------
-        list: The list of items after applying the function to each item.
-
-    """
-    return [fn(item) for item in items]
-
-
-def customzip(
-    items1: Iterable[float], items2: Iterable[float]
-) -> list[tuple[float, float]]:
-    """Zip two iterables together.
-
-    Args:
-    ----
-        items1 (Iterable[float]): The first iterable of items.
-        items2 (Iterable[float]): The second iterable of items.
-
-    Returns:
-    -------
-        list[tuple[float, float]]: The list of tuples after zipping the two iterables together.
-
-    """
-    # Create iterators for both iterables
-    iter1 = iter(items1)
-    iter2 = iter(items2)
-
-    result = []
-
-    while True:
-        try:
-            a = next(iter1)
-            b = next(iter2)
-            result.append((a, b))
-        except StopIteration:
-            break
-
-    return result
-
-
-def zipWith(
-    fn: Callable[[float, float], float],
-    items1: Iterable[float],
-    items2: Iterable[float],
-) -> list[float]:
-    """Apply a function to pairs of items from two iterables.
-
-    Args:
-    ----
-        fn (Callable[[float, float], float]): The function to apply.
-        items1 (Iterable[float]): The first iterable of items.
-        items2 (Iterable[float]): The second iterable of items.
-
-    Returns:
-    -------
-        list[float]: The list of items after applying the function to each pair of items.
-
-    """
-    return [fn(a, b) for a, b in customzip(items1, items2)]
-
-
-def reduce(fn: Callable[[float, float], float], items: Iterable[float]) -> float:
-    """Reduce an iterable of items to a single value using a binary function.
-
-    Args:
-    ----
-        fn (Callable[[float, float], float]): The function to apply.
-        items (Iterable[float]): The iterable of items to reduce.
-
-    Returns:
-    -------
-        float: The result of reducing the iterable of items to a single value.
-        Returns 0 if empty.
-
-    """
-    iterator = iter(items)
-    try:
-        result = next(iterator)
-    except StopIteration:
-        return 0.0
-    for item in iterator:
-        result = fn(result, item)
-    return result
-
-
-def negList(items: Iterable[float]) -> Iterable[float]:
-    """Negate each item in an iterable.
-
-    Args:
-    ----
-        items (iterable): The iterable of items.
-
-    Returns:
-    -------
-        list[float]: The list of items after negating each item.
-
-    """
-    return list(map(neg, items))
-
-
-def addLists(items1: Iterable[float], items2: Iterable[float]) -> Iterable[float]:
-    """Add corresponding items in two iterables together.
-
-    Args:
-    ----
-        items1 (iterable): The first iterable of items.
-        items2 (iterable): The second iterable of items.
-
-    Returns:
-    -------
-        list[float]: The list of items after adding corresponding items in the two iterables together.
-
-    """
-    return zipWith(add, items1, items2)
-
-
-def sum(items: Iterable[float]) -> float:
-    """Sum an iterable of items.
-
-    Args:
-    ----
-        items (iterable): The iterable of items.
-
-    Returns:
-    -------
-        float: The sum of the items in the iterable.
-
-    """
-    return reduce(add, items)
-
-
-def prod(items: Iterable[float]) -> float:
-    """Take the product of an iterable of items.
-
-    Args:
-    ----
-        items (iterable): The iterable of items.
-
-    Returns:
-    -------
-        float: The product of the items in the iterable.
-
-    """
-    return reduce(mul, items)
