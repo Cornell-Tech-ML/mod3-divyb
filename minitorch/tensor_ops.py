@@ -10,7 +10,7 @@ from typing_extensions import Protocol
 from . import operators
 from .tensor_data import (
     MAX_DIMS,
-    shape_broadcast
+    shape_broadcast,
 
     broadcast_index,
     index_to_position,
@@ -431,7 +431,7 @@ def tensor_reduce(
 
         out_index = np.zeros(MAX_DIMS, np.int32)
         reduce_size = a_shape[reduce_dim]
-        
+
         for i in range(len(out)):
             to_index(i, out_shape, out_index)
             o = index_to_position(out_index, out_strides)
