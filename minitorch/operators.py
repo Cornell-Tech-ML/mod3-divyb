@@ -159,39 +159,42 @@ def is_close(x: float, y: float) -> bool:
     return abs(x - y) < 1e-2
 
 
-def sigmoid(x: float) -> float:
-    """Returns sigmoid of the input.
+def sigmoid(a: float) -> float:
+    """Sigmoid function.
 
     Args:
     ----
-        x: The first number or tensor.
+        a (float): The input value.
 
     Returns:
     -------
-        The sigmoid of x
+        float: The sigmoid of the input value.
 
     """
-    # $f(x) =  \frac{1.0}{(1.0 + e^{-x})}$ if x >=0 else $\frac{e^x}{(1.0 + e^{x})}$
-    if x >= 0:
-        out = 1 / (1 + (math.exp(x * -1)))
+    if a >= 0:
+
+        return 1.0 / (1.0 + math.exp(-a))
+
     else:
-        out = math.exp(x) / (1 + (math.exp(x)))
-    return out
+
+        return math.exp(a) / (1.0 + math.exp(a))
 
 
-def relu(x: float) -> float:
-    """Returns relu of the input.
+def relu(a: float) -> float:
+    """ReLU function.
 
     Args:
     ----
-        x: The first number or tensor.
+        a (float): The input value.
 
     Returns:
     -------
-        The relu of x
+        float: The ReLU of the input value.
 
     """
-    return max(0, x)
+    return a if a > 0 else 0
+
+
 
 
 def log(x: float) -> float:
@@ -236,7 +239,7 @@ def inv(x: float) -> float:
         The inv of x
 
     """
-    return 1 / x
+    return 1.0 / x
 
 
 def log_back(x: float, y: float) -> float:
@@ -252,7 +255,7 @@ def log_back(x: float, y: float) -> float:
         The inv of x
 
     """
-    return y / x
+    return (1.0/y) * x
 
 
 def inv_back(x: float, y: float) -> float:
@@ -268,7 +271,7 @@ def inv_back(x: float, y: float) -> float:
         The inv_back of the input
 
     """
-    return -y / (x * x)
+    return -1 / (x ** 2) * y
 
 
 def relu_back(x: float, y: float) -> float:
@@ -284,8 +287,7 @@ def relu_back(x: float, y: float) -> float:
         The relu_back of the input
 
     """
-    return y if x > 0 else 0
-
+    return (1 if x > 0 else 0) * y
 
 # ## Task 0.3
 
