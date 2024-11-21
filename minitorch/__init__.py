@@ -1,3 +1,7 @@
+"""Module provides the core functionalities of the Minitorch library,
+including tensor operations, autodiff, and various optimizers.
+"""
+
 from .testing import MathTest, MathTestVariable  # type: ignore # noqa: F401,F403
 from .fast_ops import *  # noqa: F401,F403
 from .cuda_ops import *  # noqa: F401,F403

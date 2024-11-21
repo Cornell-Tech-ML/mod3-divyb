@@ -10,8 +10,6 @@ from typing_extensions import Protocol
 from . import operators
 from .tensor_data import (
     MAX_DIMS,
-    shape_broadcast,
-
     broadcast_index,
     index_to_position,
     shape_broadcast,
@@ -72,6 +70,7 @@ class TensorOps:
         raise NotImplementedError("Not implemented in this assignment")
 
     cuda = False
+
 
 class TensorBackend:
     """Class to construct a tensor backend using specified tensor operations."""
@@ -326,21 +325,16 @@ def tensor_map(
         in_shape: Shape,
         in_strides: Strides,
     ) -> None:
-
         # TODO: Implement for Task 2.3.
         out_size = len(out)
         in_index = np.zeros(len(in_shape), dtype=np.int32)
         out_index = np.zeros(len(out_shape), dtype=np.int32)
 
-
-
         for i in range(out_size):
-
             to_index(i, out_shape, out_index)
             broadcast_index(out_index, out_shape, in_shape, in_index)
             in_pos = index_to_position(in_index, in_strides)
             out[i] = fn(in_storage[in_pos])
-
 
     return _map
 
@@ -379,15 +373,12 @@ def tensor_zip(
         b_shape: Shape,
         b_strides: Strides,
     ) -> None:
-
         # TODO: Implement for Task 2.3.
 
         out_size = len(out)
         a_index = np.zeros(len(a_shape), dtype=np.int32)
         b_index = np.zeros(len(b_shape), dtype=np.int32)
         out_index = np.zeros(len(out_shape), dtype=np.int32)
-
-
 
         for i in range(out_size):
             to_index(i, out_shape, out_index)
@@ -435,7 +426,7 @@ def tensor_reduce(
         for i in range(len(out)):
             to_index(i, out_shape, out_index)
             o = index_to_position(out_index, out_strides)
-            
+
             for s in range(reduce_size):
                 out_index[reduce_dim] = s
                 j = index_to_position(out_index, a_strides)

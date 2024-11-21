@@ -172,11 +172,9 @@ def sigmoid(a: float) -> float:
 
     """
     if a >= 0:
-
         return 1.0 / (1.0 + math.exp(-a))
 
     else:
-
         return math.exp(a) / (1.0 + math.exp(a))
 
 
@@ -193,8 +191,6 @@ def relu(a: float) -> float:
 
     """
     return a if a > 0 else 0
-
-
 
 
 def log(x: float) -> float:
@@ -255,7 +251,7 @@ def log_back(x: float, y: float) -> float:
         The inv of x
 
     """
-    return (1.0/x) * y if x != 0 else 0
+    return (1.0 / x) * y if x != 0 else 0
 
 
 def inv_back(x: float, y: float) -> float:
@@ -271,7 +267,7 @@ def inv_back(x: float, y: float) -> float:
         The inv_back of the input
 
     """
-    return -1 / (x ** 2) * y
+    return -1 / (x**2) * y
 
 
 def relu_back(x: float, y: float) -> float:
@@ -288,6 +284,7 @@ def relu_back(x: float, y: float) -> float:
 
     """
     return (1 if x > 0 else 0) * y
+
 
 # ## Task 0.3
 

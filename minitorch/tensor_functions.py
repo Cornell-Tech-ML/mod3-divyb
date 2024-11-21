@@ -225,7 +225,6 @@ class Sigmoid(Function):
         """
         (sigma,) = ctx.saved_values
         return sigma * (-sigma + 1.0) * grad_output
-        
 
 
 class ReLU(Function):
@@ -427,8 +426,6 @@ class Permute(Function):
     """Permute the dimensions of a tensor based on a specified order."""
 
     @staticmethod
-
-
     def forward(ctx: Context, a: Tensor, order: Tensor) -> Tensor:
         """Permute the dimensions of the tensor."""
         ctx.save_for_backward(order)
@@ -446,6 +443,7 @@ class Permute(Function):
             )
         ]
         return grad_output._new(grad_output._tensor.permute(*order2)), 0.0
+
 
 class View(Function):
     """View function for reshaping tensors."""
