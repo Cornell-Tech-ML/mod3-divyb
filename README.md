@@ -35,9 +35,9 @@ The files that will be synced are:
 
 
 ```console
-(.venv) PS D:\Grad\Fall 2024\MLE\mod3-divyb> python project/parallel_check.py 
+(.venv) PS D:\Grad\Fall 2024\MLE\mod3-divyb> python project/parallel_check.py
 MAP
- 
+
 ================================================================================
  Parallel Accelerator Optimizing:  Function tensor_map.<locals>._map,
 D:\Grad\Fall 2024\MLE\mod3-divyb\minitorch\fast_ops.py (176)
@@ -130,7 +130,7 @@ inside the loop):
     - numpy.empty() is used for the allocation.
 None
 ZIP
- 
+
 ================================================================================
  Parallel Accelerator Optimizing:  Function tensor_zip.<locals>._zip,
 D:\Grad\Fall 2024\MLE\mod3-divyb\minitorch\fast_ops.py (238)
@@ -237,7 +237,7 @@ inside the loop):
     - numpy.empty() is used for the allocation.
 None
 REDUCE
- 
+
 ================================================================================
  Parallel Accelerator Optimizing:  Function tensor_reduce.<locals>._reduce,
 D:\Grad\Fall 2024\MLE\mod3-divyb\minitorch\fast_ops.py (306)
@@ -312,7 +312,7 @@ inside the loop):
     - numpy.empty() is used for the allocation.
 None
 MATRIX MULTIPLY
- 
+
 ================================================================================
  Parallel Accelerator Optimizing:  Function _tensor_matrix_multiply,
 D:\Grad\Fall 2024\MLE\mod3-divyb\minitorch\fast_ops.py (336)
